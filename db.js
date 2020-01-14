@@ -14,6 +14,4 @@ connection.connect(function(err) {
     if (err) throw err;
 });
 
-var mySecret = 'tetetete';
-
 module.exports = connection;

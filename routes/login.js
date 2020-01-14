@@ -4,6 +4,7 @@ var sql = require('../db.js');
 var jwt = require('jsonwebtoken');
 var mySecret = require('../secret') // phrase secrete
 var crypto = require('crypto');
+const jwtExpirySeconds = 100 // temps d'expiration du token en seconde
 
 function crypt(passe) {
 
@@ -13,10 +14,6 @@ function crypt(passe) {
         .digest('hex');
     return hash    
 }
-
-const jwtExpirySeconds = 100 // temps d'expiration du token en seconde
-
-// faire le login et passe en sql et codage passe
 
 router.post('/', (req, result) => {
     let login = req.body.login;
