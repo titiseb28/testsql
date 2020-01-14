@@ -1,7 +1,10 @@
+var expressJwt = require('express-jwt'); // protege toute les routes
+var mySecret = require('./secret') // configuration jwt 
+
 const express = require('express'),
   app = express(),
   bodyParser = require('body-parser');
-  port = process.env.PORT || 3000;
+port = process.env.PORT || 3000;
 
 app.listen(port);
 
@@ -13,6 +16,8 @@ var login = require('./routes/login')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(expressJwt({ secret: mySecret }).unless({ path: ['/login'] })); // demante pas de token pour cette route
 
 
 app.use('/wiki', wiki)
