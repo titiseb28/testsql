@@ -17,7 +17,8 @@ var login = require('./routes/login')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(expressJwt({ secret: mySecret }).unless({ path: ['/login'] })); // demante pas de token pour cette route
+app.use(expressJwt({ secret: mySecret }).unless({ path: ['/login/signin', '/login/signup'] })); // demante pas de token pour cette route
+
 
 
 app.use('/wiki', wiki)
