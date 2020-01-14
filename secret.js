@@ -1,4 +1,4 @@
 'user strict';
-var mySecret = 'tetetete';
+const mySecret = 'tetetete'; // phrase secrete
 
 module.exports = mySecret;

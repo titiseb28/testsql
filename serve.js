@@ -1,5 +1,5 @@
 var expressJwt = require('express-jwt'); // protege toute les routes
-var mySecret = require('./secret') // phrase secrette
+var mySecret = require('./secret') // configuration jwt 
 
 const express = require('express'),
   app = express(),
