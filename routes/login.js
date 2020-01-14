@@ -3,7 +3,16 @@ var router = express.Router();
 var sql = require('../db.js');
 var jwt = require('jsonwebtoken');
 var mySecret = require('../secret') // phrase secrete
+var crypto = require('crypto');
 
+function crypt(passe) {
+
+    const secret = 'abcdefg';
+    const hash = crypto.createHmac('sha256', secret)
+        .update(passe)
+        .digest('hex');
+    return hash    
+}
 
 const jwtExpirySeconds = 100 // temps d'expiration du token en seconde
 
@@ -13,7 +22,8 @@ router.post('/', (req, result) => {
     let login = req.body.login;
     let passe = req.body.passe;
     if (login && passe) {
-        sql.query('SELECT * FROM users WHERE login = ? AND passe = ?', [login, passe], (err, res) => {
+        let codeHash = crypt(passe)
+        sql.query('SELECT * FROM users WHERE login = ? AND passe = ?', [login, codeHash], (err, res) => {
             if (res.length > 0) {
                 let iat = Math.floor(Date.now() / 1000)
                 let exp = iat + jwtExpirySeconds
